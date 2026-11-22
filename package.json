@@ -1,71 +1,24 @@
 {
-  "name": "@matfire/facteur",
-  "version": "0.1.0",
-  "description": "A configurable email provider for Effect: Resend, SES and SMTP (nodemailer) behind one Mailer service.",
-  "homepage": "https://github.com/matfire/facteur#readme",
-  "bugs": {
-    "url": "https://github.com/matfire/facteur/issues"
-  },
-  "license": "MIT",
-  "author": "Matteo Gassend <matteo@matteogassend.com>",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/matfire/facteur.git"
-  },
-  "files": [
-    "dist"
+  "name": "facteur-monorepo",
+  "private": true,
+  "workspaces": [
+    "packages/*"
   ],
   "type": "module",
-  "exports": {
-    ".": "./dist/index.mjs",
-    "./drivers/nodemailer": "./dist/drivers/nodemailer.mjs",
-    "./drivers/resend": "./dist/drivers/resend.mjs",
-    "./drivers/ses": "./dist/drivers/ses.mjs",
-    "./package.json": "./package.json"
-  },
-  "publishConfig": {
-    "access": "public",
-    "provenance": true
-  },
   "scripts": {
-    "build": "tsdown",
-    "dev": "tsdown --watch",
-    "test": "vitest",
-    "typecheck": "tsc --noEmit",
-    "prepublishOnly": "npm run build",
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "test": "turbo run test",
+    "typecheck": "turbo run typecheck",
     "lint": "oxlint --deny-warnings",
     "lint:fix": "oxlint --fix",
     "format": "oxfmt",
     "format:check": "oxfmt --check"
   },
-  "dependencies": {
-    "effect": "^4.1.5"
-  },
   "devDependencies": {
-    "@aws-sdk/client-sesv2": "^3.1175.0",
-    "@types/node": "^26.6.5",
-    "nodemailer": "^10.6.1",
     "oxfmt": "^0.79.0",
     "oxlint": "^1.94.0",
-    "resend": "^6.39.0",
-    "tsdown": "^0.23.1",
-    "typescript": "7.0.2",
-    "vitest": "^5.0.5"
+    "turbo": "^2.11.13"
   },
-  "peerDependencies": {
-    "@aws-sdk/client-sesv2": "^3.1175.0",
-    "nodemailer": "^10.6.1",
-    "resend": "^6.39.0"
-  },
-  "peerDependenciesMeta": {
-    "@aws-sdk/client-sesv2": {
-      "optional": true
-    },
-    "nodemailer": {
-      "optional": true
-    },
-    "resend": {
-      "optional": true
-    }
-  }
+  "packageManager": "bun@1.4.4"
 }
