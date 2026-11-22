@@ -1,6 +1,6 @@
 # Facteur
 
-A configurable email provider. Pick Resend, Amazon SES or SMTP (via nodemailer) with environment variables, and send email through the same client whichever one you use.
+A configurable email provider. Pick Resend, Amazon SES, Postmark, Bento or SMTP (via nodemailer) with environment variables, and send email through the same client whichever one you use.
 
 Built on [Effect](https://effect.website), with a Promise API for projects that don't use Effect.
 
@@ -16,9 +16,11 @@ Built on [Effect](https://effect.website), with a Promise API for projects that 
 Install the library and the SDK of the provider you use. The other providers' SDKs are not needed.
 
 ```bash
-npm install @matfire/facteur resend                  # Resend
-npm install @matfire/facteur @aws-sdk/client-sesv2   # Amazon SES
-npm install @matfire/facteur nodemailer              # SMTP
+npm install @matfire/facteur resend                   # Resend
+npm install @matfire/facteur @aws-sdk/client-sesv2    # Amazon SES
+npm install @matfire/facteur nodemailer               # SMTP
+npm install @matfire/facteur postmark                 # Postmark
+npm install @matfire/facteur @bentonow/bento-node-sdk # Bento
 ```
 
 Effect is installed with the library. Add `effect` to your own dependencies too if you import from it, for example to use the [Effect API](#with-effect), pass a `Redacted` key when [choosing the provider in code](#choose-the-provider-in-code), or write a [test fake](#test-your-app-without-sending-email):
@@ -46,6 +48,24 @@ Set `FACTEUR_PROVIDER` and that provider's variables.
 | `FACTEUR_SES_REGION`            | yes      |                                                                                                     |
 | `FACTEUR_SES_ACCESS_KEY_ID`     | no       | Needs `FACTEUR_SES_SECRET_ACCESS_KEY` too                                                           |
 | `FACTEUR_SES_SECRET_ACCESS_KEY` | no       | Without both keys, the AWS SDK default credential chain is used (AWS env vars, `~/.aws`, IAM roles) |
+
+### Postmark
+
+| Variable                    | Required | Notes              |
+| --------------------------- | -------- | ------------------ |
+| `FACTEUR_PROVIDER=POSTMARK` | yes      |                    |
+| `FACTEUR_POSTMARK_TOKEN`    | yes      | A server API token |
+
+### Bento
+
+| Variable                        | Required |
+| ------------------------------- | -------- |
+| `FACTEUR_PROVIDER=BENTO`        | yes      |
+| `FACTEUR_BENTO_SITE_UUID`       | yes      |
+| `FACTEUR_BENTO_PUBLISHABLE_KEY` | yes      |
+| `FACTEUR_BENTO_SECRET_KEY`      | yes      |
+
+Bento's email API is narrower than the others: an email must have exactly one `to` address and an `html` body, and no `cc`, `bcc` or `replyTo`. Other emails fail with a `MailerError` before anything is sent. `text` is not sent, `from` must be an author on your Bento account, and the HTML is rendered as a Liquid template. Emails are sent as transactional, so they reach recipients who unsubscribed from marketing. Bento returns no message id, so `id` is an empty string.
 
 ### SMTP (nodemailer)
 
@@ -147,13 +167,23 @@ To skip environment variables, import a driver directly and pass its layer to `c
 ```ts
 import { Redacted } from "effect";
 import { createMailer } from "@matfire/facteur";
+import * as Bento from "@matfire/facteur/drivers/bento";
 import * as Nodemailer from "@matfire/facteur/drivers/nodemailer";
+import * as Postmark from "@matfire/facteur/drivers/postmark";
 import * as Resend from "@matfire/facteur/drivers/resend";
 import * as Ses from "@matfire/facteur/drivers/ses";
 
 createMailer(Resend.layer({ apiKey: Redacted.make(process.env.MY_RESEND_KEY!) }));
 createMailer(Ses.layer({ region: "eu-west-1" })); // any SESv2 client config
 createMailer(Nodemailer.layer("smtps://user:pass@host")); // any nodemailer transport config
+createMailer(Postmark.layer({ serverToken: Redacted.make(process.env.MY_POSTMARK_TOKEN!) }));
+createMailer(
+  Bento.layer({
+    siteUuid: process.env.MY_BENTO_SITE_UUID!,
+    publishableKey: process.env.MY_BENTO_PUBLISHABLE_KEY!,
+    secretKey: Redacted.make(process.env.MY_BENTO_SECRET_KEY!),
+  }),
+);
 ```
 
 ## Test your app without sending email

@@ -1,6 +1,6 @@
 # Facteur
 
-Monorepo for [`@matfire/facteur`](packages/facteur), a configurable email provider for Effect: Resend, SES and SMTP (nodemailer) behind one Mailer service. See the [package README](packages/facteur/README.md) for usage.
+Monorepo for [`@matfire/facteur`](packages/facteur), a configurable email provider for Effect: Resend, SES, Postmark, Bento and SMTP (nodemailer) behind one Mailer service. See the [package README](packages/facteur/README.md) for usage.
 
 ## Layout
 
