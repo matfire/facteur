@@ -1,6 +1,6 @@
 {
   "name": "@matfire/facteur",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "A configurable email provider for Effect: Resend, SES and SMTP (nodemailer) behind one Mailer service.",
   "homepage": "https://github.com/matfire/facteur#readme",
   "bugs": {
