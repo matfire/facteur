@@ -3,6 +3,11 @@ name: Release Please
 on:
   push:
     branches: [main]
+    # The website (apps/web) is not released. Release-please only tracks
+    # packages/facteur (see release-please-config.json), so commits that only
+    # touch apps/ never open a release PR; skipping the run saves the job.
+    paths-ignore:
+      - "apps/**"
 
 # The action authenticates with RELEASE_PLEASE_TOKEN, not GITHUB_TOKEN.
 # Releases created with GITHUB_TOKEN don't trigger other workflows, so the

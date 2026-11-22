@@ -1,0 +1,155 @@
+<!doctype html>
+<!-- Template for public/og.png (1200x630). Regenerate with scripts/images/generate.sh. -->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      @font-face {
+        font-family: Inter;
+        src: url("../../node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2");
+        font-weight: 100 900;
+      }
+      @font-face {
+        font-family: Mono;
+        src: url("../../node_modules/@fontsource-variable/jetbrains-mono/files/jetbrains-mono-latin-wght-normal.woff2");
+        font-weight: 100 900;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+      }
+      html,
+      body {
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+      }
+      body {
+        background: #08090a;
+        color: #f7f8f8;
+        font-family: Inter, sans-serif;
+        position: relative;
+        padding: 72px 80px;
+      }
+      .glow {
+        position: absolute;
+        left: 50%;
+        top: -260px;
+        width: 1300px;
+        height: 760px;
+        transform: translateX(-50%);
+        background: radial-gradient(closest-side, rgba(94, 106, 210, 0.32), transparent);
+      }
+      .grid {
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+        background-size: 60px 60px;
+        mask-image: radial-gradient(ellipse at 50% 0%, #000 20%, transparent 75%);
+      }
+      .content {
+        position: relative;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        font-size: 30px;
+        font-weight: 600;
+        letter-spacing: -0.5px;
+      }
+      .brand svg {
+        width: 40px;
+        height: 40px;
+      }
+      h1 {
+        margin-top: 64px;
+        font-size: 84px;
+        line-height: 1.02;
+        font-weight: 600;
+        letter-spacing: -3.2px;
+        max-width: 900px;
+        background: linear-gradient(180deg, #f7f8f8 40%, #8a8f98);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        padding-bottom: 6px;
+      }
+      .bottom {
+        margin-top: auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .chips {
+        display: flex;
+        gap: 12px;
+      }
+      .chip {
+        font-family: Mono, monospace;
+        font-size: 22px;
+        color: #d0d6e0;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 10px;
+        padding: 10px 18px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .chip i {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: #62666d;
+      }
+      .chip:first-child i {
+        background: #4cb782;
+      }
+      .url {
+        font-family: Mono, monospace;
+        font-size: 24px;
+        color: #8a8f98;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="glow"></div>
+    <div class="grid"></div>
+    <div class="content">
+      <div class="brand">
+        <svg viewBox="0 0 16 16">
+          <defs>
+            <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#f7f8f8" />
+              <stop offset="1" stop-color="#8a8f98" />
+            </linearGradient>
+          </defs>
+          <rect width="16" height="16" rx="4" fill="url(#g)" />
+          <path
+            d="M3.5 5.5 8 8.75l4.5-3.25"
+            fill="none"
+            stroke="#08090a"
+            stroke-width="1.4"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+        Facteur
+      </div>
+      <h1>The email client for every provider</h1>
+      <div class="bottom">
+        <div class="chips">
+          <span class="chip"><i></i>RESEND</span><span class="chip"><i></i>SES</span
+          ><span class="chip"><i></i>SMTP</span>
+        </div>
+        <span class="url">facteur.dev</span>
+      </div>
+    </div>
+  </body>
+</html>
