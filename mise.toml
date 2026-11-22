@@ -1,0 +1,4 @@
+[tools]
+bun = "latest"
+cocogitto = "7"
+lefthook = "latest"
