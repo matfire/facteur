@@ -4,12 +4,15 @@ on:
   release:
     types: [published]
 
+# Only the facteur package is published. Its release tags look like facteur-v1.2.3.
+
 permissions:
   contents: read
   id-token: write # npm trusted publishing (OIDC), no NPM_TOKEN needed
 
 jobs:
   publish:
+    if: startsWith(github.event.release.tag_name, 'facteur-v')
     runs-on: ubuntu-latest
     environment: npm
     concurrency:
@@ -27,4 +30,6 @@ jobs:
       - run: bun run lint
       - run: bun run typecheck
       - run: bun run test
+      - run: bun run build
       - run: npm stage publish --access public --provenance
+        working-directory: packages/facteur
