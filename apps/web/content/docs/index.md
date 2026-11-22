@@ -1,11 +1,11 @@
 ---
 title: Introduction
-description: "Facteur sends email through Resend, Amazon SES or SMTP with the same TypeScript client. Learn what it does and send your first email."
+description: "Facteur sends email through Resend, Amazon SES, Postmark, Bento or SMTP with the same TypeScript client. Learn what it does and send your first email."
 section: Getting started
 order: 0
 ---
 
-Facteur is a configurable email client for TypeScript. Pick Resend, Amazon SES or SMTP (via nodemailer) with environment variables, and send email through the same client whichever one you use.
+Facteur is a configurable email client for TypeScript. Pick Resend, Amazon SES, Postmark, Bento or SMTP (via nodemailer) with environment variables, and send email through the same client whichever one you use.
 
 It is built on [Effect](https://effect.website), with a Promise API for projects that don't use Effect.
 

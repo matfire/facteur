@@ -20,7 +20,7 @@ const ogImage = {
   url: absoluteUrl("/og.png"),
   width: "1200",
   height: "630",
-  alt: "Facteur: one email client for Resend, Amazon SES and SMTP",
+  alt: "Facteur: one email client for Resend, SES, Postmark, Bento and SMTP",
 };
 
 /**

@@ -7,9 +7,9 @@ export const site = {
   version: pkg.version,
   license: pkg.license,
   /** Default title and description, used by the home page and as fallbacks. */
-  title: "Facteur: one email client for Resend, Amazon SES and SMTP",
+  title: "Facteur: one email client for Resend, SES, Postmark, Bento and SMTP",
   description:
-    "Facteur is a TypeScript email library: send through Resend, Amazon SES or SMTP with the same client, and pick the provider with an environment variable. Promise API or Effect.",
+    "Facteur is a TypeScript email library: send through Resend, Amazon SES, Postmark, Bento or SMTP with the same client, and pick the provider with an environment variable. Promise API or Effect.",
   repo: "https://github.com/matfire/facteur",
   changelog: "https://github.com/matfire/facteur/blob/main/packages/facteur/CHANGELOG.md",
   npm: `https://www.npmjs.com/package/${pkg.name}`,

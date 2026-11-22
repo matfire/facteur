@@ -13,4 +13,7 @@
   },
   // Attaches facteur.dev to this Worker on deploy. The zone must be on the same Cloudflare account.
   "routes": [{ "pattern": "facteur.dev", "custom_domain": true }],
+  // Workers Builds runs `wrangler preview` for non-production branches (PRs), which needs this
+  // block. It can stay empty: assets and compatibility settings above apply to previews too.
+  "previews": {},
 }

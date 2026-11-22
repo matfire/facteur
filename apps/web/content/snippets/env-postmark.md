@@ -1,0 +1,4 @@
+```bash
+FACTEUR_PROVIDER=POSTMARK
+FACTEUR_POSTMARK_TOKEN=...   # a server API token
+```

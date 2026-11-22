@@ -40,6 +40,20 @@ const providers: Array<Provider> = [
     sdk: "nodemailer",
     envHtml: snippet("env-nodemailer"),
   },
+  {
+    id: "postmark",
+    env: "POSTMARK",
+    label: "Postmark",
+    sdk: "postmark",
+    envHtml: snippet("env-postmark"),
+  },
+  {
+    id: "bento",
+    env: "BENTO",
+    label: "Bento",
+    sdk: "@bentonow/bento-node-sdk",
+    envHtml: snippet("env-bento"),
+  },
 ];
 
 const features = [
@@ -90,8 +104,9 @@ function Home() {
               The email client for every provider
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted">
-              Resend, Amazon SES and SMTP behind one typed client. Pick the provider with an
-              environment variable, and keep the code that sends email exactly as it is.
+              Resend, Amazon SES, Postmark, Bento and SMTP behind one typed client. Pick the
+              provider with an environment variable, and keep the code that sends email exactly as
+              it is.
             </p>
             <div className="mt-9 flex flex-wrap items-center gap-3">
               <Link
