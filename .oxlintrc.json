@@ -5,8 +5,16 @@
     "correctness": "error",
     "suspicious": "warn"
   },
-  "rules": {},
+  "rules": {
+    "no-underscore-dangle": [
+      "warn",
+      {
+        "allow": ["_meta", "_splat"]
+      }
+    ]
+  },
   "env": {
     "builtin": true
-  }
+  },
+  "ignorePatterns": ["apps/web/src/routeTree.gen.ts"]
 }
