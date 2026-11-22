@@ -1,0 +1,18 @@
+pre-commit:
+  # Format first, then lint the formatted files.
+  piped: true
+  jobs:
+    - name: format
+      # oxfmt skips file types it doesn't support. The flag keeps commits that
+      # only touch ignored files (CHANGELOG.md) from failing.
+      run: bun run format --no-error-on-unmatched-pattern {staged_files}
+      stage_fixed: true
+
+    - name: lint
+      glob: "*.{js,mjs,cjs,jsx,ts,mts,cts,tsx}"
+      run: bun run lint {staged_files}
+
+commit-msg:
+  jobs:
+    - name: conventional commit
+      run: cog verify --ignore-merge-commits --ignore-fixup-commits --file {1}
