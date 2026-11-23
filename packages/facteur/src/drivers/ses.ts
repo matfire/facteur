@@ -1,7 +1,7 @@
 import type { SendEmailCommandInput, SESv2ClientConfig } from "@aws-sdk/client-sesv2";
 import type { Email } from "../Mailer";
-import { SendEmailCommand, SESv2Client } from "@aws-sdk/client-sesv2";
 import { Config, Effect, Layer, Option, Redacted } from "effect";
+import { importPeer } from "../internal/peer";
 import { recipientList } from "../internal/recipients";
 import { validated } from "../internal/validated";
 import { Mailer, MailerError } from "../Mailer";
@@ -38,6 +38,10 @@ export const layer = (config: SESv2ClientConfig = {}) =>
   Layer.effect(
     Mailer,
     Effect.gen(function* () {
+      const { SendEmailCommand, SESv2Client } = yield* importPeer(
+        PROVIDER,
+        () => import("@aws-sdk/client-sesv2"),
+      );
       const client = yield* Effect.acquireRelease(
         Effect.sync(() => new SESv2Client(config)),
         (created) => Effect.sync(() => created.destroy()),

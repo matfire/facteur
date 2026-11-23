@@ -1,7 +1,7 @@
 import type { SendMailOptions, TransportConfig } from "nodemailer";
 import type { Email } from "../Mailer";
 import { Config, Effect, Layer, Option, Redacted } from "effect";
-import { createTransport } from "nodemailer";
+import { importPeer } from "../internal/peer";
 import { recipients } from "../internal/recipients";
 import { validated } from "../internal/validated";
 import { Mailer, MailerError } from "../Mailer";
@@ -28,6 +28,7 @@ export const layer = (transport: TransportConfig | string) =>
   Layer.effect(
     Mailer,
     Effect.gen(function* () {
+      const { createTransport } = yield* importPeer(PROVIDER, () => import("nodemailer"));
       const transporter = yield* Effect.acquireRelease(
         Effect.sync(() => createTransport(transport)),
         (created) => Effect.sync(() => created.close()),
