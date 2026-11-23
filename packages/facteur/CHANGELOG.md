@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.3](https://github.com/matfire/facteur/compare/facteur-v0.1.2...facteur-v0.1.3) (2026-11-23)
+
+
+### Bug Fixes
+
+* load optional peer SDKs lazily so bundlers don't fail on missing peers ([c30fb79](https://github.com/matfire/facteur/commit/c30fb794206a4ec43ef53f1f438cff750ce7d8ca))
+* stop Vite builds failing on optional SDKs you didn't install ([a58c88f](https://github.com/matfire/facteur/commit/a58c88fd5e3fa823b0447372db67c2cc5a96d140))
+
 ## [0.1.2](https://github.com/matfire/facteur/compare/facteur-v0.1.1...facteur-v0.1.2) (2026-11-23)
 
 
