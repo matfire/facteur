@@ -21,15 +21,16 @@ const loadDriver = <A>(provider: string, load: () => Promise<A>) =>
  * - `FACTEUR_PROVIDER=POSTMARK` + `FACTEUR_POSTMARK_TOKEN` → Postmark driver
  * - `FACTEUR_PROVIDER=BENTO` + `FACTEUR_BENTO_SITE_UUID`, `FACTEUR_BENTO_PUBLISHABLE_KEY`
  *   and `FACTEUR_BENTO_SECRET_KEY` → Bento driver
+ * - `FACTEUR_PROVIDER=CONSOLE` → prints emails to the console instead of sending them
  *
  * Drivers are imported on demand, so only the selected one's peer dependency
  * (`resend`, `nodemailer`, `@aws-sdk/client-sesv2`, `postmark` or
- * `@bentonow/bento-node-sdk`) needs to be installed.
+ * `@bentonow/bento-node-sdk`) needs to be installed. The console driver needs none.
  */
 export const layerConfig = Layer.unwrap(
   Effect.gen(function* () {
     const provider = yield* Config.Literals(
-      ["RESEND", "NODEMAILER", "SES", "POSTMARK", "BENTO"],
+      ["RESEND", "NODEMAILER", "SES", "POSTMARK", "BENTO", "CONSOLE"],
       "FACTEUR_PROVIDER",
     );
     switch (provider) {
@@ -43,6 +44,8 @@ export const layerConfig = Layer.unwrap(
         return (yield* loadDriver("postmark", () => import("./drivers/postmark"))).layerConfig;
       case "BENTO":
         return (yield* loadDriver("bento", () => import("./drivers/bento"))).layerConfig;
+      case "CONSOLE":
+        return (yield* loadDriver("console", () => import("./drivers/console"))).layerConfig;
     }
   }),
 );

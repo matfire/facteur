@@ -67,6 +67,14 @@ Set `FACTEUR_PROVIDER` and that provider's variables.
 
 Bento's email API is narrower than the others: an email must have exactly one `to` address and an `html` body, and no `cc`, `bcc` or `replyTo`. Other emails fail with a `MailerError` before anything is sent. `text` is not sent, `from` must be an author on your Bento account, and the HTML is rendered as a Liquid template. Emails are sent as transactional, so they reach recipients who unsubscribed from marketing. Bento returns no message id, so `id` is an empty string.
 
+### Console
+
+| Variable                   | Required |
+| -------------------------- | -------- |
+| `FACTEUR_PROVIDER=CONSOLE` | yes      |
+
+Prints each email to the console instead of sending it, for local development. It needs no SDK or credentials, and each email gets a random UUID as its `id`. It is only used when selected: an unset `FACTEUR_PROVIDER` still fails.
+
 ### SMTP (nodemailer)
 
 | Variable                      | Required | Notes                                          |
@@ -168,6 +176,7 @@ To skip environment variables, import a driver directly and pass its layer to `c
 import { Redacted } from "effect";
 import { createMailer } from "@matfire/facteur";
 import * as Bento from "@matfire/facteur/drivers/bento";
+import * as ConsoleMailer from "@matfire/facteur/drivers/console";
 import * as Nodemailer from "@matfire/facteur/drivers/nodemailer";
 import * as Postmark from "@matfire/facteur/drivers/postmark";
 import * as Resend from "@matfire/facteur/drivers/resend";
@@ -184,6 +193,7 @@ createMailer(
     secretKey: Redacted.make(process.env.MY_BENTO_SECRET_KEY!),
   }),
 );
+createMailer(ConsoleMailer.layer); // prints emails instead of sending them
 ```
 
 ## Test your app without sending email

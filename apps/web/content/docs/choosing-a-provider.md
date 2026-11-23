@@ -11,6 +11,7 @@ To skip environment variables, import a driver directly and pass its layer to `c
 import { Redacted } from "effect";
 import { createMailer } from "@matfire/facteur";
 import * as Bento from "@matfire/facteur/drivers/bento";
+import * as ConsoleMailer from "@matfire/facteur/drivers/console";
 import * as Nodemailer from "@matfire/facteur/drivers/nodemailer";
 import * as Postmark from "@matfire/facteur/drivers/postmark";
 import * as Resend from "@matfire/facteur/drivers/resend";
@@ -27,4 +28,5 @@ createMailer(
     secretKey: Redacted.make(process.env.MY_BENTO_SECRET_KEY!),
   }),
 );
+createMailer(ConsoleMailer.layer); // prints emails instead of sending them
 ```

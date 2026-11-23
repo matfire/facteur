@@ -14,6 +14,7 @@ It is built on [Effect](https://effect.website), with a Promise API for projects
 - Configuration comes from environment variables (config file support is planned).
 - Drivers are tree-shakeable, and each provider's SDK is an optional peer dependency.
 - The same client works with every provider.
+- For local development, `FACTEUR_PROVIDER=CONSOLE` prints emails instead of sending them.
 - Missing or invalid configuration fails when the mailer is built, before any email is sent.
 
 ## A first email
