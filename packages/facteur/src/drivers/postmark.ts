@@ -2,7 +2,7 @@ import type { Redacted as RedactedValue } from "effect";
 import type { Message } from "postmark";
 import type { Email } from "../Mailer";
 import { Config, Effect, Layer, Redacted } from "effect";
-import { ServerClient } from "postmark";
+import { importPeer } from "../internal/peer";
 import { validated } from "../internal/validated";
 import { Mailer, MailerError } from "../Mailer";
 
@@ -31,7 +31,8 @@ export interface PostmarkOptions {
 export const layer = (options: PostmarkOptions) =>
   Layer.effect(
     Mailer,
-    Effect.sync(() => {
+    Effect.gen(function* () {
+      const { ServerClient } = yield* importPeer(PROVIDER, () => import("postmark"));
       const client = new ServerClient(Redacted.value(options.serverToken));
 
       const send = Effect.fn("facteur/postmark.send")(function* (email: Email) {

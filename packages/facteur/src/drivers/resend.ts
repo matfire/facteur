@@ -2,7 +2,7 @@ import type { Redacted as RedactedValue } from "effect";
 import type { CreateEmailOptions } from "resend";
 import type { Email } from "../Mailer";
 import { Config, Effect, Layer, Redacted } from "effect";
-import { Resend } from "resend";
+import { importPeer } from "../internal/peer";
 import { recipients } from "../internal/recipients";
 import { validated } from "../internal/validated";
 import { Mailer, MailerError } from "../Mailer";
@@ -32,7 +32,8 @@ export interface ResendOptions {
 export const layer = (options: ResendOptions) =>
   Layer.effect(
     Mailer,
-    Effect.sync(() => {
+    Effect.gen(function* () {
+      const { Resend } = yield* importPeer(PROVIDER, () => import("resend"));
       const client = new Resend(Redacted.value(options.apiKey));
 
       const send = Effect.fn("facteur/resend.send")(function* (email: Email) {

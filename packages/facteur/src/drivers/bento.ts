@@ -1,7 +1,7 @@
 import type { Redacted as RedactedValue } from "effect";
 import type { Email } from "../Mailer";
-import { Analytics } from "@bentonow/bento-node-sdk";
 import { Config, Effect, Layer, Redacted } from "effect";
+import { importPeer } from "../internal/peer";
 import { recipientList } from "../internal/recipients";
 import { validated } from "../internal/validated";
 import { Mailer, MailerError } from "../Mailer";
@@ -40,7 +40,8 @@ export interface BentoOptions {
 export const layer = (options: BentoOptions) =>
   Layer.effect(
     Mailer,
-    Effect.sync(() => {
+    Effect.gen(function* () {
+      const { Analytics } = yield* importPeer(PROVIDER, () => import("@bentonow/bento-node-sdk"));
       const client = new Analytics({
         siteUuid: options.siteUuid,
         authentication: {

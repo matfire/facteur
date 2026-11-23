@@ -1,16 +1,5 @@
 import { Config, Effect, Layer } from "effect";
-import { MailerError } from "./Mailer";
-
-const loadDriver = <A>(provider: string, load: () => Promise<A>) =>
-  Effect.tryPromise({
-    try: load,
-    catch: (cause) =>
-      new MailerError({
-        provider,
-        message: `Could not load the ${provider} driver. Is its peer dependency installed?`,
-        cause,
-      }),
-  });
+import { importPeer as loadDriver } from "./internal/peer";
 
 /**
  * Builds the Mailer from the environment.
