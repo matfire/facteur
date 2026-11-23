@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.2](https://github.com/matfire/facteur/compare/facteur-v0.1.1...facteur-v0.1.2) (2026-11-23)
+
+
+### Features
+
+* add console driver for local development ([90721f4](https://github.com/matfire/facteur/commit/90721f43c35a9d48d6fd58544c05f9f7c22aa732))
+
 ## [0.1.1](https://github.com/matfire/facteur/compare/facteur-v0.1.0...facteur-v0.1.1) (2026-11-22)
 
 
