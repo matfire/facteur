@@ -1,7 +1,14 @@
 import { useState } from "react";
 import { CodeBlock } from "./CodeBlock";
 
-export type Provider = { id: string; env: string; label: string; sdk: string; envHtml: string };
+export type Provider = {
+  id: string;
+  env: string;
+  label: string;
+  /** The peer dependency to install, or undefined when the driver needs none. */
+  sdk?: string;
+  envHtml: string;
+};
 type Tab = "send.ts" | "effect.ts" | ".env";
 
 /**
@@ -73,9 +80,13 @@ export function ProductWindow({
           </ul>
           <p className="mt-auto pt-5 text-xs leading-relaxed text-faint">
             {tab === ".env" ? (
-              <>
-                Needs <span className="font-mono text-muted">{provider.sdk}</span> installed.
-              </>
+              provider.sdk === undefined ? (
+                <>Needs no SDK. Prints each email instead of sending it.</>
+              ) : (
+                <>
+                  Needs <span className="font-mono text-muted">{provider.sdk}</span> installed.
+                </>
+              )
             ) : (
               <>
                 {tab} is the same for every provider.{" "}

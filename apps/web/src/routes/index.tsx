@@ -54,6 +54,7 @@ const providers: Array<Provider> = [
     sdk: "@bentonow/bento-node-sdk",
     envHtml: snippet("env-bento"),
   },
+  { id: "console", env: "CONSOLE", label: "Console", envHtml: snippet("env-console") },
 ];
 
 const features = [

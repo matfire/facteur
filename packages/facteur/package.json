@@ -20,6 +20,7 @@
   "exports": {
     ".": "./dist/index.mjs",
     "./drivers/bento": "./dist/drivers/bento.mjs",
+    "./drivers/console": "./dist/drivers/console.mjs",
     "./drivers/nodemailer": "./dist/drivers/nodemailer.mjs",
     "./drivers/postmark": "./dist/drivers/postmark.mjs",
     "./drivers/resend": "./dist/drivers/resend.mjs",

@@ -15,6 +15,8 @@ npm install @matfire/facteur postmark                 # Postmark
 npm install @matfire/facteur @bentonow/bento-node-sdk # Bento
 ```
 
+The console driver, which prints emails instead of sending them, needs no SDK: `npm install @matfire/facteur` is enough.
+
 Effect is installed with the library. Add `effect` to your own dependencies too if you import from it, for example to use the [Effect API](/docs/effect), pass a `Redacted` key when [choosing the provider in code](/docs/choosing-a-provider), or write a [test fake](/docs/testing):
 
 ```bash

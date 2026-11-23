@@ -8,6 +8,7 @@ export default defineConfig({
     "drivers/nodemailer": "src/drivers/nodemailer.ts",
     "drivers/postmark": "src/drivers/postmark.ts",
     "drivers/bento": "src/drivers/bento.ts",
+    "drivers/console": "src/drivers/console.ts",
   },
   dts: {
     generator: "tsgo",
